@@ -8,11 +8,10 @@ $(function(){
 				running = setInterval(function() {
 					$.get("/waiting/" + id, function( data1 ) {
 						if (data1.length == count * 7) {
-								clearInterval(running);
-								$("#waiting").hide();
-								$("#show").show();
-								update_charts(data1);
-							}
+							clearInterval(running);
+							$("#waiting").hide();
+							$("#show").show();
+							update_charts(data1);
 						}
 					});
 				}, 2000);
