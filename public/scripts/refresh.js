@@ -52,8 +52,6 @@ var update_charts = function (_data) {
 				entityMap[entityId] = entityText;
 			}
 
-			console.log(entityMap);
-
 			var dates = {};
 			var entities = {};
 
@@ -88,44 +86,103 @@ var update_charts = function (_data) {
 			// }
 			lineChartData.datasets = [];
 
-
+			lineChartData.datasets.push(
+				{
+						label: "base line",
+						fillColor : "rgba(0,0,0,0.35)",
+						strokeColor : "rgba(0,0,0,1)",
+						pointColor : "rgba(0,0,0,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(0,0,0,1)",
+						data: [0,0,0,0,0,0,0]
+					}
+				);
 			var entities_keys = Object.keys(entities);
 			for (var j = 0; j < entities_keys.length; ++j) {
 				var data = [];
 				for (var i = 0; i < labels.length; ++i) {
 					data.push(map[entities_keys[j]][labels[i]].aggregate);
 				}
-				if (j % 2 == 0) {
+				if (j % 3 == 0) {
 					lineChartData.datasets.push({
 						label: entityMap[entities_keys[j]],
-						fillColor : "rgba(220,220,220,0.2)",
-						strokeColor : "rgba(220,220,220,1)",
-						pointColor : "rgba(220,220,220,1)",
+						fillColor : "rgba(45,142,176,0.35)",
+						strokeColor : "rgba(45,142,176,1)",
+						pointColor : "rgba(45,142,176,1)",
 						pointStrokeColor : "#fff",
 						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(220,220,220,1)",
+						pointHighlightStroke : "rgba(45,142,176,1)",
+						data: data
+					});
+				} else if (j%3 == 1) {
+					lineChartData.datasets.push({
+						label: entityMap[entities_keys[j]],
+						fillColor : "rgba(244,108,111,0.35)",
+						strokeColor : "rgba(244,108,111,1)",
+						pointColor : "rgba(244,108,111,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(244,108,111,1)",
 						data: data
 					});
 				} else {
 					lineChartData.datasets.push({
 						label: entityMap[entities_keys[j]],
-						fillColor : "rgba(151,187,205,0.2)",
-						strokeColor : "rgba(151,187,205,1)",
-						pointColor : "rgba(151,187,205,1)",
+						fillColor : "rgba(60,120,60,0.35)",
+						strokeColor : "rgba(60,120,60,1)",
+						pointColor : "rgba(60,120,60,1)",
 						pointStrokeColor : "#fff",
 						pointHighlightFill : "#fff",
-						pointHighlightStroke : "rgba(151,187,205,1)",
+						pointHighlightStroke : "rgba(60,120,60,1)",
 						data: data
 					});
 				}
 			}
 
-			var ctx = document.getElementById("chartline").getContext("2d");
-			window.myLine = new Chart(ctx).Line(lineChartData, {
+			for (var j = 0; j < entities_keys.length; ++j) {
+				// entityId = entities_keys[j]
+				var zx_data;
+				var positive = 0; var negative = 0;
+				for (var i = 0; i < _data.length; ++i) {
+					if (_data[i].entityId == entities_keys[j]) {
+						positive += _data[i].positive;
+						negative += _data[i].negative;
+					}
+				}
+				zx_data = [{
+					value: positive,
+					color: "rgba(42,142,176,1)",
+					highlight: "rgba(42,142,176,0.35)",
+					label: "Positive"
+				},
+				{
+					value: negative,
+					color: "rgba(244,108,111,1)",
+					highlight: "rgba(244,108,111,0.35)",
+					label: "Negative"
+				}];
+				var idddd = "doughnut" + j;
+				$("#title" + j).html(entityMap[entities_keys[j]]);
+				var ctx = document.getElementById(idddd).getContext("2d");
+				new Chart(ctx).Doughnut(zx_data	, {
+					responsive: false
+				});
+
+			}
+
+			for (var j = 5; j >= entities_keys.length; --j) {
+				$("#doughnut" + j).parent("div").remove();
+				// $("#title" + j).remove();
+			}
+
+			var ctx0 = document.getElementById("chartline").getContext("2d");
+			window.myLine = new Chart(ctx0).Line(lineChartData, {
 				responsive: false,
+				scaleFontColor: "#fff",
+				scaleGridLineColor: "rgba(120,120,120,0.5)",
 				multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
 			});
-
 		});
 	}
 }

@@ -34,5 +34,21 @@ body {
 }
 
 
-#chartline {;
+#chartline {
+}
+
+#dooo > div{
+	display: inline-block;
+	margin: auto;
+	width: 30%;
+}
+
+.doughnuttitle {
+	display: inline-block;
+	margin-bottom: 20px;
+	width: 100%;
+}
+
+h2 {
+	text-transform: uppercase;
 }
