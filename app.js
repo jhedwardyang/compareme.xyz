@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var hod = require('./routes/hod');
 var twitter = require('./routes/twitter');
+var waiting = require('./routes/waiting');
 
 var app = express();
 
@@ -25,9 +26,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/k', users);
 app.use('/', hod);
 app.use('/', twitter);
+app.use('/waiting', waiting);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
