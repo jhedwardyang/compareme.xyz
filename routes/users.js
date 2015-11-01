@@ -78,6 +78,7 @@ var p1 = function(res, body, id) {
 }
 
 var p2 = function(res, body, id, date, entityId) {
+	console.log(body);
 	var statuses = body.statuses;
 	var short = {};
 	var compressed = "";
