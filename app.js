@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var hod = require('./routes/hod');
 var twitter = require('./routes/twitter');
 var waiting = require('./routes/waiting');
+var stock = require('./routes/stock');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/k', users);
 app.use('/', hod);
 app.use('/', twitter);
 app.use('/waiting', waiting);
+app.use('/stock', stock);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

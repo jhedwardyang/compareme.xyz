@@ -37,13 +37,19 @@ body {
 #chartline {
 }
 
+#stockgraphs > div {
+	display: inline-block;
+	margin: auto;
+	width: 30%;
+}
+
 #dooo > div{
 	display: inline-block;
 	margin: auto;
 	width: 30%;
 }
 
-.doughnuttitle {
+.doughnuttitle, .stocktitle {
 	display: inline-block;
 	margin-bottom: 20px;
 	width: 100%;

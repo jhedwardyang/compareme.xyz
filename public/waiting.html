@@ -8,14 +8,8 @@
 	<body>
 		<a href="/"><div><img src="/images/logoless.png" width="500"/></div></a>
 		<img src="/images/spinner.gif" id="waiting"/>
-		<div id="show" style="display:none">
-			<div>
-				<h2>twitter reaction</h2>
-				<canvas id="chartline" height="450" width="800"></canvas>
-			</div>
-
-
-			<h2 style="margin-top: 60px;">brand breakdown</h2>
+		<div id="show" style="display:none;margin-top: 60px;">
+			<h2>average weekly review</h2>
 			<div id="dooo">
 				<div>
 				<div id="title0" class="doughnuttitle"></div>
@@ -42,6 +36,42 @@
 				<canvas id="doughnut5" height="300" width="300"></canvas>
 				</div>
 			</div>
+
+			<div style="margin-top: 60px;">
+				<h2>twitter reaction</h2>
+				<canvas id="chartline" height="450" width="800"></canvas>
+			</div>
+
+			<div id="stockgraphs" style="margin-top: 60px;">
+				<h2>stock prices</h2>
+				<div>
+					<div id="stitle0" class="stocktitle"></div>
+					<canvas id="stock0" height="350" width="400"></canvas>
+				</div>
+				<div>
+					<div id="stitle1" class="stocktitle"></div>
+					<canvas id="stock1" height="350" width="400"></canvas>
+				</div>
+				<div>
+					<div id="stitle2" class="stocktitle"></div>
+					<canvas id="stock2" height="350" width="400"></canvas>
+				</div>
+				<div>
+					<div id="stitle3" class="stocktitle"></div>
+					<canvas id="stock3" height="350" width="400"></canvas>
+				</div>
+				<div>
+					<div id="stitle4" class="stocktitle"></div>
+					<canvas id="stock4" height="350" width="400"></canvas>
+				</div>
+				<div>
+					<div id="stitle5" class="stocktitle"></div>
+					<canvas id="stock5" height="350" width="400"></canvas>
+				</div>
+			</div>
+
+
+
 		</div>
 		<script src="/assets/jquery-2.1.4.min.js/jquery-2.1.4.min.js"></script>
 		<script src="/assets/chart.js/Chart.js"></script>

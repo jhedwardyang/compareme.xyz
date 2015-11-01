@@ -34,6 +34,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
+var action = require('../yahoo/action.js');
 var p1 = function(res, body, id) {
 	if (body === null || body.entities === undefined) {
 		res.send("No entity found");
@@ -42,6 +43,7 @@ var p1 = function(res, body, id) {
 	var dates = ["2015-10-25","2015-10-26","2015-10-27","2015-10-28","2015-10-29","2015-10-30","2015-10-31"];
 	for (var i = 0; i < body.entities.length; ++i) {
 		(function(i) {
+			
 			var clean = connection.escape(body.entities[i].matches[0].original_text)
 			connection.query('INSERT INTO entities VALUES (null, ' + id + ', ' + clean + ')', function(err, result) {
 			if (err) throw err;
@@ -51,6 +53,19 @@ var p1 = function(res, body, id) {
 					for (var j = 0; j < dates.length; ++j) {
 						twitter(clean, dates[j], res, p2, id, entityId);
 					}
+
+					if (body.entities[i].type == "companies_eng" && body.entities[i].additional_information.company_google !== undefined) {
+					for (var jj = 0; jj < body.entities[i].additional_information.company_google.length; ++jj) {
+						if (body.entities[i].additional_information.company_google[jj].indexOf("NASDAQ") > -1) {
+							action.NASDAQ(body.entities[i].additional_information.company_google[jj].substring(
+								body.entities[i].additional_information.company_google[jj].indexOf("NASDAQ")+7), id, entityId);
+						} else if (body.entities[i].additional_information.company_google[jj].indexOf("NYSE") > -1) {
+							action.NYSE(body.entities[i].additional_information.company_google[jj].substring(
+								body.entities[i].additional_information.company_google[jj].indexOf("NYSE")+5), id, entityId);
+						}
+					}
+				}
+
 				});
 			});
 		})(i);
