@@ -23,10 +23,10 @@ router.get('/', function(req, res, next) {
 	var q = req.query.q;
 
 	//
-	connection.query('INSERT INTO Queries VALUES (null, ' + connection.escape(q) + ', NULL)', function(err, result) {
+	connection.query('INSERT INTO queries VALUES (null, ' + connection.escape(q) + ', NULL)', function(err, result) {
 		if (err) throw err;
 		var id;
-		connection.query('SELECT * FROM Queries WHERE text = ' + connection.escape(q) + ' ORDER BY id DESC LIMIT 1', function(err, results, fields) {
+		connection.query('SELECT * FROM queries WHERE text = ' + connection.escape(q) + ' ORDER BY id DESC LIMIT 1', function(err, results, fields) {
 			if (err) throw err;
 			id = results[0].id;
 			entity(q, res, p1, id);
@@ -72,7 +72,7 @@ var p2 = function(res, body, id, date, entityId) {
 	sentiment(compressed, res, p3, id, date, entityId);
 }
 var p3 = function(res, body, id, date, entityId) {
-	connection.query('INSERT INTO Results VALUES (null, ' + id + ',' + entityId + ',"' + date + '",' + body.positive.length + ',' + body.negative.length + ',' + body.aggregate.score + ')', function(err, result) {
+	connection.query('INSERT INTO results VALUES (null, ' + id + ',' + entityId + ',"' + date + '",' + body.positive.length + ',' + body.negative.length + ',' + body.aggregate.score + ')', function(err, result) {
 		if (err) throw err;
 	});
 }
