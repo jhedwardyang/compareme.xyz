@@ -62,6 +62,9 @@ var p1 = function(res, body, id) {
 						} else if (body.entities[i].additional_information.company_google[jj].indexOf("NYSE") > -1) {
 							action.NYSE(body.entities[i].additional_information.company_google[jj].substring(
 								body.entities[i].additional_information.company_google[jj].indexOf("NYSE")+5), id, entityId);
+						} else if (body.entities[i].additional_information.company_google[jj].indexOf("LON") > -1) {
+							action.NYSE(body.entities[i].additional_information.company_google[jj].substring(
+								body.entities[i].additional_information.company_google[jj].indexOf("LON")+4), id, entityId);
 						}
 					}
 				}

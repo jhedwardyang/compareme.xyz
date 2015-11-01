@@ -23,16 +23,18 @@ var call = function(obj, queryId, entityId) {
 	
 }
 var NASDAQ = function(ticker, queryId, entityId) {
-	console.log("FOUND NYSE:" + ticker);
 	stock(ticker, queryId, entityId, call);
 }
 var NYSE = function(ticker, queryId, entityId) {
-	console.log("FOUND NYSE:" + ticker);
+	stock(ticker, queryId, entityId, call);
+}
+var LON = function(ticker, queryId, entityId) {
 	stock(ticker, queryId, entityId, call);
 }
 
 
 action.NASDAQ = NASDAQ;
 action.NYSE = NYSE;
+action.LON = LON;
 
 module.exports = action;
