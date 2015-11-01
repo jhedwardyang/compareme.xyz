@@ -7,7 +7,7 @@ $(function(){
 				var running;
 				running = setInterval(function() {
 					$.get("/waiting/" + id, function( data1 ) {
-						if (data1.length == count * 7) {
+						if (data1.length > count * 5) {
 							clearInterval(running);
 							$("#waiting").hide();
 							$("#show").show();
