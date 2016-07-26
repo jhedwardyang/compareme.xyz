@@ -7,7 +7,7 @@ $(function(){
 				var running;
 				running = setInterval(function() {
 					$.get("/waiting/" + id, function( data1 ) {
-						if (data1.length > count * 5) {
+						if (data1.length == count * 7) {
 							clearInterval(running);
 							$("#waiting").hide();
 							$("#show").show();
@@ -17,8 +17,6 @@ $(function(){
 				}, 2000);
 			}
 	    });
-	} else {
-		console.log(id);
 	}
 });
 
@@ -202,8 +200,6 @@ var update_charts = function (_data) {
 
 
 var get_stocks = function(queryId, entityMap) {
-	console.log(queryId);
-	console.log(entityMap);
 	$.get("/stock/" + queryId, function( data ) {
 		var dates = {'2015-10-25': 1};
 		var closes = {};
